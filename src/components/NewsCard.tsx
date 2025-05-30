@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Image, TouchableOpacity} from 'react-native';
-import {Card, Text, IconButton} from 'react-native-paper';
+import {Card, Text, IconButton, useTheme} from 'react-native-paper';
 import {Article} from '../types';
 import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../store';
@@ -12,6 +12,7 @@ interface NewsCardProps {
 }
 
 export const NewsCard: React.FC<NewsCardProps> = ({article, onPress}) => {
+  const theme = useTheme();
   const dispatch = useDispatch();
   const isBookmarked = useSelector((state: RootState) =>
     state.bookmarks.articles.some(bookmark => bookmark.url === article.url),
@@ -27,13 +28,16 @@ export const NewsCard: React.FC<NewsCardProps> = ({article, onPress}) => {
 
   return (
     <TouchableOpacity onPress={() => onPress(article)}>
-      <Card style={styles.card}>
+      <Card style={[styles.card, {backgroundColor: theme.colors.surface}]}>
         {article.urlToImage && (
           <Card.Cover source={{uri: article.urlToImage}} style={styles.image} />
         )}
         <Card.Content>
           <View style={styles.titleContainer}>
-            <Text variant="titleMedium" style={styles.title} numberOfLines={2}>
+            <Text
+              variant="titleMedium"
+              style={[styles.title, {color: theme.colors.text}]}
+              numberOfLines={2}>
               {article.title}
             </Text>
             <IconButton
@@ -53,10 +57,14 @@ export const NewsCard: React.FC<NewsCardProps> = ({article, onPress}) => {
             />
           </View>
           <View style={styles.footer}>
-            <Text variant="bodySmall" style={styles.source}>
+            <Text
+              variant="bodySmall"
+              style={[styles.source, {color: theme.colors.secondary}]}>
               {article.source.name}
             </Text>
-            <Text variant="bodySmall" style={styles.date}>
+            <Text
+              variant="bodySmall"
+              style={[styles.date, {color: theme.colors.secondary}]}>
               {new Date(article.publishedAt).toLocaleDateString()}
             </Text>
           </View>

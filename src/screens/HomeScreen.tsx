@@ -1,13 +1,15 @@
 import React, {useEffect, useState, useCallback} from 'react';
 import {FlatList, StyleSheet, RefreshControl, View, Text} from 'react-native';
-import {ActivityIndicator} from 'react-native-paper';
+import {ActivityIndicator, useTheme} from 'react-native-paper';
 import {NewsCard} from '../components/NewsCard';
 import {newsService} from '../services/newsService';
 import {Article} from '../types';
 import {SearchBar} from '../components/SearchBar';
+import {ThemeToggle} from '../components/ThemeToggle';
 import debounce from 'lodash.debounce';
 
 export const HomeScreen = ({navigation}: any) => {
+  const theme = useTheme();
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -62,17 +64,23 @@ export const HomeScreen = ({navigation}: any) => {
     !loading && articles.length === 0 && searchQuery.trim() !== '';
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[styles.container, {backgroundColor: theme.colors.background}]}>
       <SearchBar
         searchQuery={searchQuery}
         onChangeSearch={handleSearchChange}
       />
 
       {loading ? (
-        <ActivityIndicator style={styles.loader} size="large" color="#0000ff" />
+        <ActivityIndicator
+          style={styles.loader}
+          size="large"
+          color={theme.colors.primary}
+        />
       ) : showEmptyState ? (
         <View style={styles.emptyStateContainer}>
-          <Text style={styles.emptyStateText}>
+          <Text
+            style={[styles.emptyStateText, {color: theme.colors.secondary}]}>
             No articles found for "{searchQuery}"
           </Text>
         </View>
@@ -84,11 +92,16 @@ export const HomeScreen = ({navigation}: any) => {
           )}
           keyExtractor={(item, index) => item.url + index}
           refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+              tintColor={theme.colors.primary}
+            />
           }
           keyboardShouldPersistTaps="handled"
         />
       )}
+      <ThemeToggle />
     </View>
   );
 };
@@ -96,7 +109,6 @@ export const HomeScreen = ({navigation}: any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
   },
   loader: {
     flex: 1,
@@ -111,7 +123,6 @@ const styles = StyleSheet.create({
   },
   emptyStateText: {
     fontSize: 18,
-    color: '#666',
     textAlign: 'center',
   },
 });

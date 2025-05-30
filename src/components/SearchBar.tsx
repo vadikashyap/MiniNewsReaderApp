@@ -1,53 +1,65 @@
 import React from 'react';
-import {StyleSheet, View, Image} from 'react-native';
-import {Searchbar as PaperSearchbar} from 'react-native-paper';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {StyleSheet, Image} from 'react-native';
+import {Searchbar, useTheme} from 'react-native-paper';
 
 interface SearchBarProps {
   searchQuery: string;
   onChangeSearch: (query: string) => void;
-  onSubmit?: () => void; // Optional onSubmit for triggering search
 }
 
 export const SearchBar: React.FC<SearchBarProps> = ({
   searchQuery,
   onChangeSearch,
-  onSubmit,
 }) => {
+  const theme = useTheme();
+
   return (
-    <View style={styles.container}>
-      <PaperSearchbar
-        placeholder="Search articles..."
-        onChangeText={onChangeSearch}
-        value={searchQuery}
-        onSubmitEditing={onSubmit}
-        style={styles.searchbar}
-        icon={() => (
-          <Image source={require('../assets/search.png')} style={styles.icon} />
-        )}
-        clearIcon={() =>
-          searchQuery.length ? (
-            <Image
-              source={require('../assets/clear.png')}
-              style={styles.icon}
-            />
-          ) : null
-        }
-      />
-    </View>
+    <Searchbar
+      placeholder="Search news..."
+      onChangeText={onChangeSearch}
+      value={searchQuery}
+      style={[
+        styles.searchBar,
+        {
+          backgroundColor: theme.colors.surface,
+          borderColor: theme.colors.primary,
+          borderWidth: 1,
+        },
+      ]}
+      iconColor={theme.colors.primary}
+      inputStyle={[
+        styles.input,
+        {
+          color: theme.colors.text,
+          backgroundColor: theme.colors.surface,
+        },
+      ]}
+      placeholderTextColor={theme.colors.secondary}
+      icon={() => (
+        <Image source={require('../assets/search.png')} style={styles.icon} />
+      )}
+      clearIcon={() =>
+        searchQuery.length > 0 ? (
+          <Image source={require('../assets/clear.png')} style={styles.icon} />
+        ) : null
+      }
+    />
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 8,
-    backgroundColor: '#fff', // Optional: set background color
+  searchBar: {
+    margin: 16,
+    elevation: 4,
+    borderRadius: 8,
   },
-  searchbar: {
-    elevation: 2, // Optional: add shadow on Android
+  input: {
+    fontSize: 16,
+    height: 40,
   },
   icon: {
-    width: 22,
-    height: 22,
+    width: 24,
+    height: 24,
+    tintColor: '#666',
   },
 });
