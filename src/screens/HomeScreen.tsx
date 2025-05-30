@@ -7,6 +7,7 @@ import {Article} from '../types';
 import {SearchBar} from '../components/SearchBar';
 import {ThemeToggle} from '../components/ThemeToggle';
 import debounce from 'lodash.debounce';
+import {saveArticles, loadArticles} from '../store/articlesSlice';
 
 export const HomeScreen = ({navigation}: any) => {
   const theme = useTheme();
@@ -24,10 +25,14 @@ export const HomeScreen = ({navigation}: any) => {
       } else {
         response = await newsService.searchByQuery(query);
       }
+
       setArticles(response.articles);
+      await saveArticles(response.articles); // Save to AsyncStorage
     } catch (error) {
       console.error('Error fetching news:', error);
-      setArticles([]);
+
+      const cached = await loadArticles();
+      setArticles(cached);
     } finally {
       setLoading(false);
       setRefreshing(false);

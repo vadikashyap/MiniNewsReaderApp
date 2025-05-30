@@ -1,11 +1,13 @@
 import {configureStore} from '@reduxjs/toolkit';
 import bookmarksReducer from './bookmarksSlice';
 import themeReducer from './themeSlice';
+import articlesReducer from './articlesSlice';
 
 export const store = configureStore({
   reducer: {
     bookmarks: bookmarksReducer,
     theme: themeReducer,
+    articles: articlesReducer,
     // Add other reducers here if needed later
   },
 });

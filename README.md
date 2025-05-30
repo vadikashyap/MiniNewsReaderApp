@@ -1,97 +1,139 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# MiniNewsReader
 
-# Getting Started
+A modern news reading application built with React Native that provides a seamless experience for reading news articles with features like offline support, dark mode, and beautiful UI.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Features
 
-## Step 1: Start Metro
+- 📰 Latest news articles from various categories
+- 🌙 Dark mode support with smooth theme switching
+- 📱 Responsive and modern UI design
+- 🔄 Pull-to-refresh functionality
+- 📥 Offline mode support
+- 🔍 Search functionality
+- 📱 Cross-platform (iOS & Android)
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## Screenshots
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+[Add screenshots here]
 
-```sh
-# Using npm
-npm start
+## Tech Stack
 
-# OR using Yarn
-yarn start
+- React Native
+- Redux Toolkit for state management
+- React Navigation for routing
+- AsyncStorage for offline data persistence
+- Axios for API calls
+- React Native Vector Icons
+- React Native NetInfo for network status
+
+## Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+- React Native development environment setup
+- iOS: XCode (for Mac users)
+- Android: Android Studio
+
+## Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/yourusername/MiniNewsReader.git
+cd MiniNewsReader
 ```
 
-## Step 2: Build and run your app
+2. Install dependencies:
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
+```bash
+npm install
+# or
+yarn install
 ```
+
+3. Install iOS dependencies (Mac only):
+
+```bash
+cd ios
+pod install
+cd ..
+```
+
+## Running the App
 
 ### iOS
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
+```bash
 npm run ios
-
-# OR using Yarn
+# or
 yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+### Android
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+```bash
+npm run android
+# or
+yarn android
+```
 
-## Step 3: Modify your app
+## Project Structure
 
-Now that you have successfully run the app, let's make changes!
+```
+src/
+├── components/     # Reusable UI components
+├── screens/        # Screen components
+├── navigation/     # Navigation configuration
+├── store/         # Redux store and slices
+├── services/      # API and other services
+├── utils/         # Utility functions
+└── assets/        # Images and other static assets
+```
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+## Features in Detail
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+### News Feed
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+- Latest news articles with images
+- Pull-to-refresh functionality
+- Article details view
+- Category-based filtering
 
-## Congratulations! :tada:
+### Dark Mode
 
-You've successfully run and modified your React Native App. :partying_face:
+- System theme detection
+- Manual theme toggle
+- Persistent theme preference
+- Smooth theme transitions
 
-### Now what?
+### Offline Support
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+- Automatic article caching
+- Offline article reading
+- Network status detection
+- Seamless online/offline transition
 
-# Troubleshooting
+### Search
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+- Real-time search results
+- Search history
+- Category-based filtering
+- Offline search support
 
-# Learn More
+## Contributing
 
-To learn more about React Native, take a look at the following resources:
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- News API for providing the news data
+- React Native community for the amazing tools and libraries
+- All contributors who have helped in making this project better
